@@ -52,7 +52,7 @@ export default {
 <style lang="scss" scoped>
 .app-contacts {
   overflow-y: auto;
-  flex-basis: 25%;
+  flex-basis: 30%;
   height: 100%;
   padding: 10px;
   border-radius: 10px 0 0 10px;

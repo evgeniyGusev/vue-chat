@@ -1,24 +1,12 @@
-# vue-chat
+### Общее:
+ - У окна чата 3 состояния:
+    - когда диалог не выбран
+    - когда выбран диалог с пустой историей сообщений
+    - сообщения из истории
+ - БЭМ не использовался намеренно, так как в скопед стилях особо не вижу в нем смысла
+ - Сторонние библиотеки(например, Vuex) не использовались, т.к. счел их излишними
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Контакты:
+ - Контакт может быть онлайн
+ - Если контакт онлайн, то он отвечает на сообщения
+ - Если контакт онлайн, то после отправки ему сообщения меняется его статус в шапке окна чата

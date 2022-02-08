@@ -51,10 +51,12 @@ export default {
               name,
               username,
               avatar: 'https://placekitten.com/g/35/35',
+              isOnline: Math.random() >= 0.5,
               messages: new Array((Math.floor(Math.random() * 7)))
                 .fill(undefined)
                 .map(() => ({
                   inbox: true,
+                  time: 'Вчера',
                   value: mockMessages[Math.floor(Math.random() * mockMessages.length)],
                 })),
             }));

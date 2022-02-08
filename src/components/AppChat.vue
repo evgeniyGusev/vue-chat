@@ -24,6 +24,9 @@
           :class="['message', !message.inbox && '_sent']"
         >
           {{ message.value }}
+          <span class="time">
+            {{ message.time }}
+          </span>
         </li>
       </ul>
     </section>
@@ -70,24 +73,34 @@ export default {
         : '⇽ Выберите, кому хотите написать';
     },
     getContactStatus() {
-      return this.isContactTyping ? 'Печатает...' : 'В сети';
+      return this.isContactTyping ? 'Печатает...' : (this.checkedContact.isOnline ? 'Онлайн' : 'Был в сети недавно');
     },
   },
 
   methods: {
     sendMessage() {
       if (this.message) {
-        this.$emit('send-message', { value: this.message });
+        let date = new Date();
+
+        this.$emit('send-message', { value: this.message, time: date.toLocaleTimeString() });
         this.message = '';
 
-        setTimeout(() => {
-          this.isContactTyping = true;
-
+        if (this.checkedContact.isOnline) {
           setTimeout(() => {
-            this.$emit('send-message', { inbox: true, value: 'Извини, отвечу позже :(' });
-            this.isContactTyping = false;
-          }, 1500);
-        }, 1000);
+            this.isContactTyping = true;
+
+            setTimeout(() => {
+              date = new Date();
+
+              this.$emit('send-message', {
+                inbox: true,
+                time: date.toLocaleTimeString(),
+                value: 'Извини, отвечу позже :(',
+              });
+              this.isContactTyping = false;
+            }, 1500);
+          }, 700);
+        }
       }
     },
   },
@@ -148,6 +161,7 @@ export default {
       padding: 5px;
 
       .message {
+        position: relative;
         width: 48%;
         padding: 10px 15px 20px;
         box-shadow: 0 0 3px #444;
@@ -159,10 +173,23 @@ export default {
           margin-bottom: 15px;
         }
 
+        .time {
+          position: absolute;
+          right: 10px;
+          bottom: 3px;
+          font-size: 12px;
+          font-style: italic;
+          color: grey;
+        }
+
         &._sent {
           margin-left: auto;
           background: rgb(0, 126, 204);
           color: #fff;
+
+          .time {
+            color: #ffffff90;
+          }
         }
       }
     }

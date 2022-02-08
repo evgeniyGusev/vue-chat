@@ -16,7 +16,7 @@
       <li
         v-for="contact in contacts"
         :key="contact.id"
-        :class="['contacts-item', contact.name === checkedContactName && '_checked']"
+        :class="['contacts-item', contact.name === checkedContactName && '_checked', contact.isOnline && '_online']"
         @click="setContact(contact)"
       >
         <img :src="contact.avatar" :alt="contact.name" class="avatar">
@@ -78,11 +78,23 @@ export default {
 
   .contacts-list {
     .contacts-item {
+      position: relative;
       display: flex;
       align-items: flex-start;
       padding: 10px 0;
       border-bottom: 1px solid #dadada;
       cursor: pointer;
+
+      &._online::after {
+        content: "";
+        position: absolute;
+        top: 10px;
+        left: 0;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #00a900;
+      }
 
       &._checked {
         background: #dadada;
@@ -95,6 +107,7 @@ export default {
       }
 
       .avatar {
+        position: relative;
         margin-right: 7px;
         border-radius: 50%;
       }

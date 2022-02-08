@@ -69,9 +69,37 @@ export default {
     .contacts-item {
       display: flex;
       align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px solid #dadada;
+      cursor: pointer;
 
-      &:not(:last-child) {
-        margin-bottom: 20px;
+      &:hover {
+        transform: translateX(3px);
+        background: #f6f6f6;
+        box-shadow: 0 2px 2px #dadada;
+      }
+
+      .avatar {
+        margin-right: 7px;
+        border-radius: 50%;
+      }
+
+      .contact-data {
+        max-width: calc(100% - 42px);
+
+        .name {
+          margin-bottom: 3px;
+          font-size: 14px;
+          font-weight: 600;
+        }
+
+        .last-message {
+          overflow: hidden;
+          font-size: 12px;
+          font-style: italic;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
       }
     }
   }

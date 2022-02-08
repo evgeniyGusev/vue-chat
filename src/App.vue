@@ -4,7 +4,9 @@
       :is-load-error="isLoadContactsError"
       :contacts="contacts"
     />
-    <app-chat />
+    <app-chat
+      :checked-contact="checkedContact"
+    />
   </div>
 </template>
 
@@ -20,6 +22,7 @@ export default {
   data() {
     return {
       contacts: [],
+      checkedContact: null,
       isLoadContactsError: true,
     };
   },
@@ -43,12 +46,12 @@ export default {
               id,
               name,
               username,
-              avatar: 'https://placekitten.com/g/30/30',
+              avatar: 'https://placekitten.com/g/35/35',
               messages: new Array(5)
                 .fill(undefined)
                 .map(() => ({
                   inbox: true,
-                  value: 'Lorem ipsum dolor sit amet',
+                  value: 'Lorem ipsum dolor sit amet sdf sdf sdf sdf sdf ',
                 })),
             }));
         } else {

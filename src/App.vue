@@ -3,9 +3,12 @@
     <app-contacts
       :is-load-error="isLoadContactsError"
       :contacts="contacts"
+      :checked-contact-name="checkedContact ? checkedContact.name : ''"
+      @set-contact="setCheckedContact"
     />
     <app-chat
       :checked-contact="checkedContact"
+      @send-message="pushMessage"
     />
   </div>
 </template>
@@ -13,6 +16,7 @@
 <script>
 import AppContacts from '@/components/AppContacts.vue';
 import AppChat from '@/components/AppChat.vue';
+import mockMessages from '@/assets/messages';
 
 export default {
   name: 'App',
@@ -47,11 +51,11 @@ export default {
               name,
               username,
               avatar: 'https://placekitten.com/g/35/35',
-              messages: new Array(5)
+              messages: new Array((Math.floor(Math.random() * 7)))
                 .fill(undefined)
                 .map(() => ({
                   inbox: true,
-                  value: 'Lorem ipsum dolor sit amet sdf sdf sdf sdf sdf ',
+                  value: mockMessages[Math.floor(Math.random() * mockMessages.length)],
                 })),
             }));
         } else {
@@ -60,6 +64,12 @@ export default {
       } catch {
         this.isLoadContactsError = true;
       }
+    },
+    setCheckedContact(contact) {
+      this.checkedContact = contact;
+    },
+    pushMessage(message) {
+      this.checkedContact.messages.push(message);
     },
   },
 };

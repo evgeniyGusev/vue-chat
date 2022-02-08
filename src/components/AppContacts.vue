@@ -16,7 +16,8 @@
       <li
         v-for="contact in contacts"
         :key="contact.id"
-        class="contacts-item"
+        :class="['contacts-item', contact.name === checkedContactName && '_checked']"
+        @click="setContact(contact)"
       >
         <img :src="contact.avatar" :alt="contact.name" class="avatar">
         <div class="contact-data">
@@ -24,7 +25,7 @@
             {{ contact.name }}
           </div>
           <div class="last-message">
-            {{ contact.messages.at(-1).value }}
+            {{ contact.messages.length ? contact.messages.at(-1).value : 'Нет сообщений' }}
           </div>
         </div>
       </li>
@@ -44,6 +45,16 @@ export default {
     contacts: {
       type: Array,
       default: () => [],
+    },
+    checkedContactName: {
+      type: String,
+      default: '',
+    },
+  },
+
+  methods: {
+    setContact(contact) {
+      this.$emit('set-contact', contact);
     },
   },
 };
@@ -72,6 +83,10 @@ export default {
       padding: 10px 0;
       border-bottom: 1px solid #dadada;
       cursor: pointer;
+
+      &._checked {
+        background: #dadada;
+      }
 
       &:hover {
         transform: translateX(3px);

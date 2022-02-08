@@ -55,7 +55,7 @@ export default {
               messages: new Array((Math.floor(Math.random() * 7)))
                 .fill(undefined)
                 .map(() => ({
-                  inbox: true,
+                  inbox: Math.random() >= 0.3,
                   time: 'Вчера',
                   value: mockMessages[Math.floor(Math.random() * mockMessages.length)],
                 })),

@@ -7,7 +7,7 @@
     <div v-if="isLoadError" class="load-error">
       Ошибка загрузки контактов
 
-      <button class="reload-contacts">
+      <button class="reload-contacts" @click="$emit('reload')">
         повторить
       </button>
     </div>
@@ -74,6 +74,21 @@ export default {
     margin-bottom: 10px;
     padding-bottom: 10px;
     border-bottom: 1px solid #999;
+  }
+
+  .load-error {
+    .reload-contacts {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px 0;
+      border-radius: 5px;
+      background: green;
+      color: #fff;
+
+      &:hover {
+        background: #00a900;
+      }
+    }
   }
 
   .contacts-list {

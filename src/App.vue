@@ -5,6 +5,7 @@
       :contacts="contacts"
       :checked-contact-name="checkedContact ? checkedContact.name : ''"
       @set-contact="setCheckedContact"
+      @reload="fetchContacts"
     />
     <app-chat
       :checked-contact="checkedContact"
@@ -27,7 +28,7 @@ export default {
     return {
       contacts: [],
       checkedContact: null,
-      isLoadContactsError: true,
+      isLoadContactsError: false,
     };
   },
 
